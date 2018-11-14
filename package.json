@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "run-p watch:build watch:server",
+    "build": "webpack",
     "watch:build": "webpack --watch",
     "watch:server": "nodemon server.js --ignore client/"
   },
