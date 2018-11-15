@@ -29,7 +29,7 @@ The order of the pins and the lightbulbs are very important. The array of pins f
 
 ### Server Setup:
 In the terminal on your Raspberry Pi run:
-* `git clone`
+* `git clone https://github.com/bvillagran/pinary-lights.git`
 * `cd pinary-lights`
 * `npm install`*
 * `npm run build`
