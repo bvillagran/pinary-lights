@@ -1,8 +1,8 @@
 // Set up the HTTP server which will serve the client files.
 const serveStatic = require('serve-static')('client/dist');
 const http = require('http').createServer((req,res) => {
-    serveStatic(req, res, (err, req, res) => {
-        console.log("Error: HTTP request fell through.\n" + err);
+    serveStatic(req, res, (req, res) => {
+        console.log("Error: HTTP request fell through.\n");
     });
 });
 
