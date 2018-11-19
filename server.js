@@ -1,6 +1,10 @@
 // Set up the HTTP server which will serve the client files.
 const serveStatic = require('serve-static')('client/dist');
-const http = require('http').createServer(serveStatic);
+const http = require('http').createServer((req,res) => {
+    serveStatic(req, res, (req, res) => {
+        console.log("Error: HTTP request fell through.");
+    });
+});
 
 // Set up the Socket.io server, using the HTTP server and replacing the default parser with an
 // optimized JSON parser since we'll only be sending single numbers or arrays anyway.

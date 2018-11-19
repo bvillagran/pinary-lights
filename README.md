@@ -31,11 +31,11 @@ The order of the pins and the lightbulbs are very important. The array of pins f
 In the terminal on your Raspberry Pi run:
 * `git clone`
 * `cd pinary-lights`
-* `npm install`*
+* `npm install`**\***
 * `npm run build`
 * `npm start`
 
-\*at this point you may want to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js) if you have to, I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address if you know it. Also you can change the pins array in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) if you would like to use different pins.
+**\*** at this point you may want to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js) if you have to, I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address if you know it. Also you can change the pins array in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) if you would like to use different pins.
 
 
 ## Connect
