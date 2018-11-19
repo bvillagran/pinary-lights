@@ -1,9 +1,12 @@
-// Set up the HTTP server which will serve the client files.
+// Set up the HTTP server which will serve the static client files.
+const finalhandler = require('finalhandler');
 const serveStatic = require('serve-static')('client/dist');
 const http = require('http').createServer((req,res) => {
-    serveStatic(req, res, (req, res) => {
-        console.log("Error: HTTP request fell through.\n");
-    });
+    serveStatic(req, res, finalhandler(req, res, { 
+        onerror: (err) => {
+            console.error(err.stack || err.toString());
+        }
+    }));
 });
 
 // Set up the Socket.io server, using the HTTP server and replacing the default parser with an

@@ -13,6 +13,7 @@
   "author": "Brandon Villagran",
   "license": "MIT",
   "dependencies": {
+    "finalhandler": "^1.1.1",
     "onoff": "^3.2.2",
     "serve-static": "^1.13.2",
     "socket.io": "^2.1.1",
