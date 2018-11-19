@@ -17,9 +17,9 @@ This project not only serves to be an upgrade from the original, but also a lear
 ## Installation
 ### Requirements:
 * Raspberry Pi Model 3 - Haven't tested on older models but you're welcome to try! onoff also has support for other microcontrollers.
-* Raspbian installed - I used latest LITE version, but you can probably just use any linux distro w/ support for the GPIO interface since Node is cross-platform.
-* Node installed - I used 11.1.0, but you should be able to use any version that supports ES6 (ES2015) features since I used a lot of those.
-* Something to let you SSH into the Raspberry Pi if you like. Throughout my project I used the ssh command provided by bash-like Windows terminals.
+* Raspbian installed - Tested on a clean install of Raspbian Stretch Full Version (2018-11-13).
+* Node installed - I used 11.2.0 (latest version at the time of this edit) installed via [nvm](https://github.com/creationix/nvm "https://github.com/creationix/nvm"), but you should be able to use any version that supports ES6 (ES2015) features.
+* Something to let you SSH into the Raspberry Pi if you like. My main machine is on Windows 10 so I used the ssh command provided in some terminals such as Git Bash or [Cmder](https://github.com/cmderdev/cmder "https://github.com/cmderdev/cmder"). [PuTTY](https://www.ssh.com/ssh/putty/download "https://www.ssh.com/ssh/putty/download") is another popular option.
 * 8 Lightbulbs or LEDs and a way to connect them to the GPIO interface on the Raspberry Pi board (I don't provide instructions on how to do this here, but there are plenty of tutorials online and YouTube videos to help you do it).
 
 ### Lightbulb/LED Setup:
@@ -28,10 +28,12 @@ The project assumes you have 8 lightbulbs or LEDs connected to 8 GPIO pins on yo
 The order of the pins and the lightbulbs are very important. The array of pins found in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) assumes that the corresponding lightbulbs are ordered the same way.
 
 ### Server Setup:
+I did this in the default home directory: `/home/`**[`pi` or your user]**`/`. 
 In the terminal on your Raspberry Pi run:
+
 * `git clone https://github.com/bvillagran/pinary-lights.git`
-* `cd pinary-lights`
-* `npm install`**\***
+* `cd pinary-lights`**\***
+* `npm install`
 * `npm run build`
 * `npm start`
 
@@ -41,10 +43,13 @@ In the terminal on your Raspberry Pi run:
 ## Connect
 Your Pi terminal should spit out the local IPv4 address your server can be reached. But if it doesn't or the server crashes, check line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js) again and make adjustments as needed. You can also find your Pi's IPv4 address in your home router settings.
 
-Once you have the address, open up a web browser on any locally connected device (internet isn't required, you just need to be on the same local network) and type in the url the server gives. 
+Once you have the address, open up a web browser on any locally connected device (internet isn't required, you just need to be on the same local network) and type in the url the server gives, which should just be your Pi's IPv4 address and port 3000. 
 
 For example, the Pi terminal will read something like: `Server listening on http://10.0.0.8:3000` and you just copy and paste the url or manually look for it's address yourself and type it in. Once you've opened up the interface and all is connected properly, go nuts! Press the buttons and see what happens. If you are on a mobile device like a smartphone or tablet (but not laptop) you should be able to tap more than one button at a time, you can check out the client-side code for that dirty trick.
 
 ## Troubleshoot
-* Make sure your Raspberry Pi user is added to the 'gpio' user group, I ran into a problem where running the onoff scripts resulted in some user access privilage errors.
+* If you aren't using the default Pi user, make sure that your user is added to the `gpio` user group.
+* Make sure you are using a version of Node that supports ES6 features.
+* You may run into issues if you have multiple versions of Node installed, make sure you are using the same version throughout the whole process.
+* If you find issues specifically with your GPIO pins, you can test them with the [WiringPi](http://wiringpi.com/the-gpio-utility/ "http://wiringpi.com/the-gpio-utility/") gpio utility that usually comes preinstalled with Raspbian, or manually install it. The utility allows you to send commands to your GPIO interface through the terminal without writing a script to do it. One note I'll make here is to pass the `-g` flag to your commands to make sure you are using the same numbering scheme (BCM) as the project.
 * I will add more things here as I find out about more issues.
