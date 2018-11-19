@@ -28,7 +28,7 @@ The project assumes you have 8 lightbulbs or LEDs connected to 8 GPIO pins on yo
 The order of the pins and the lightbulbs are very important. The array of pins found in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) assumes that the corresponding lightbulbs are ordered the same way.
 
 ### Server Setup:
-I did this in the default home directory: `/home/`**[`pi` or your user]**`/`. 
+I did this in the default home directory: `/home/[pi or your user]/`. 
 In the terminal on your Raspberry Pi run:
 
 * `git clone https://github.com/bvillagran/pinary-lights.git`
