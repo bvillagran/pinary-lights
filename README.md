@@ -5,6 +5,7 @@ This is a reimplementation of an older school project, previously called Binary 
 
 The client and the server interact over the Socket.IO interface. When a client connects, the server will send the current state of each GPIO pin and the client interface will update to represent it. When a button is clicked or tapped, the client tells the server to switch the state of the corresponding pin, and the server will broadcast that change to all connected clients. The pin changing will also be reflected in the state of the corresponding lightbulb/LED changing from on to off or vice-versa.
 
+
 # How To
 This project not only serves to be an upgrade from the original, but also a learning experience for me in using Node and Socket.IO. As such, I encourage beginner to intermediate JavaScript programmers who also want to learn how to use Node on a Raspberry Pi to create cool home-automation style projects, to clone this repo and set up the project at home. I try to heavily comment my code to help guide you through it. But if you still find yourself confused, you can check out the relevant API documentation:
 * [Node.js](https://nodejs.org/api/ "Node API Documentation")
@@ -14,7 +15,9 @@ This project not only serves to be an upgrade from the original, but also a lear
 * [serve-static (Node static file server package)](https://www.npmjs.com/package/serve-static "https://www.npmjs.com/package/serve-static")
 * [Webpack](https://webpack.js.org/guides/getting-started/ "https://webpack.js.org/guides/getting-started/")
 
-## Installation
+
+
+## Installation & Setup
 ### Requirements:
 * Raspberry Pi Model 3 - Haven't tested on older models but you're welcome to try! onoff also has support for other microcontrollers.
 * Raspbian installed - Tested on a clean install of Raspbian Stretch Full Version (2018-11-13).
@@ -28,8 +31,7 @@ The project assumes you have 8 lightbulbs or LEDs connected to 8 GPIO pins on yo
 The order of the pins and the lightbulbs are very important. The array of pins found in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) assumes that the corresponding lightbulbs are ordered the same way.
 
 ### Server Setup:
-I did this in the default home directory: `/home/`**[`pi` or your user]**`/`. 
-In the terminal on your Raspberry Pi run:
+I did this in the default home directory of the Raspberry Pi: `/home/pi/`. Replace `pi` with your user if you have a different one. In the terminal run:
 
 * `git clone https://github.com/bvillagran/pinary-lights.git`
 * `cd pinary-lights`**\***
@@ -37,8 +39,19 @@ In the terminal on your Raspberry Pi run:
 * `npm run build`
 * `npm start`
 
-**\*** at this point you may want to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js) if you have to, I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address if you know it. Also you can change the pins array in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) if you would like to use different pins.
+**\*** at this point you may have to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js), I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address if you know it. Also you can change the pins array in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) if you would like to use different pins.
+### Optionally Configure Autostart with PM2 (Recommended):
+* `npm install -g pm2`
+* `pm2 startup`
+* copy, paste, and run the command it gives you
+* move into your project directory, e.g. `cd ~/pinary-lights/`
+* `pm2 start server.js`
+* check that it's in the process list with `pm2 ls`
+* `pm2 save`
 
+Your server should now be set to run on startup and every time you reboot your Pi. You may want to test it to make sure it works everytime. For more information visit the [pm2 docs](https://pm2.io/doc/en/runtime/overview/ "https://pm2.io/doc/en/runtime/overview/").
+
+#
 
 ## Connect
 Your Pi terminal should spit out the local IPv4 address your server can be reached. But if it doesn't or the server crashes, check line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js) again and make adjustments as needed. You can also find your Pi's IPv4 address in your home router settings.
@@ -46,6 +59,8 @@ Your Pi terminal should spit out the local IPv4 address your server can be reach
 Once you have the address, open up a web browser on any locally connected device (internet isn't required, you just need to be on the same local network) and type in the url the server gives, which should just be your Pi's IPv4 address and port 3000. 
 
 For example, the Pi terminal will read something like: `Server listening on http://10.0.0.8:3000` and you just copy and paste the url or manually look for it's address yourself and type it in. Once you've opened up the interface and all is connected properly, go nuts! Press the buttons and see what happens. If you are on a mobile device like a smartphone or tablet (but not laptop) you should be able to tap more than one button at a time, you can check out the client-side code for that dirty trick.
+
+#
 
 ## Troubleshoot
 * If you aren't using the default Pi user, make sure that your user is added to the `gpio` user group.
