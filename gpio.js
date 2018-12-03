@@ -10,7 +10,11 @@ const pins = [2, 3, 4, 14, 15, 0, 5, 6];
 /* ---------------------------------------------------------------------------------------- */
 
 // Use the pin numbers to create new gpio objects to interface with
-const gpioPins = pins.map(number => new Gpio(number, 'out'));
+// Since I am hooked to lightbulbs via low voltage triggered relay modules:
+// direction = high 
+// activeLow = true
+// If you are not, change the values to their respective opposites, read the onoff package api for more info.
+const gpioPins = pins.map(number => new Gpio(number, 'high', { activeLow: true }));
 
 /**
  * Asynchronously reads the state of all BCM GPIO pins specified by the 'pins' array
