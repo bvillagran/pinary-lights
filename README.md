@@ -39,7 +39,7 @@ I did this in the default home directory of the Raspberry Pi: `/home/pi/`. Repla
 * `npm run build`
 * `npm start`
 
-**\*** at this point you may have to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js), I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address if you know it. Also you can change the pins array in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) if you would like to use different pins.
+**\*** at this point you may have to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js), I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address if you know it. Also you can change the pins array in [gpio.js](https://github.com/bvillagran/pinary-lights/blob/master/gpio.js) if you would like to use different pins, or change the values of `direction` and `activeLow` on the gpio objects if you are not wired via low voltage triggered relays. `Ctrl+C` when you want to stop the application.
 ### Optionally Configure Autostart with PM2 (Recommended):
 * `npm install -g pm2`
 * `pm2 startup`
