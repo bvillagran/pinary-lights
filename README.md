@@ -30,7 +30,14 @@ In the home directory `/home/pi/` (or wherever you want), run these terminal com
 * `npm run build`
 * `npm start`
 
-**\*** at this point you may have to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js), I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address as a string if you know it. Your server will crash if that command fails. You also may want to make changes to gpio.js mentioned in the previous section. Hit `Ctrl+C` to stop the application.
+**\*** at this point you may have to change line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js), I recommend testing that command in the Node REPL, or to avoid that all together just hardcode your Pi's IPv4 address as a string if you know it. Your server will crash if that command fails. You also may want to make changes to gpio.js mentioned in the previous section. Hit `Ctrl+C` to stop the server application.
+
+### Connect
+If everything is in place and your server is running properly, you can now connect to the client interface via the browser of any other device that exists on the same local network that your Raspberry Pi is connected to. To do this, type in the local IPv4 address of your Pi followed by the port number (3000).
+
+For example, in the url bar of your browser type in: `192.168.1.128:3000` replacing the address part with your Pi's address.
+
+Your Pi terminal should have outputted the local IPv4 address your server can be reached. But again, if it doesn't or the server crashes, check line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js) and make adjustments as needed.
 
 ### [Optional] Configure Autostart with PM2 (Recommended):
 * `npm install -g pm2`
@@ -42,14 +49,6 @@ In the home directory `/home/pi/` (or wherever you want), run these terminal com
 * `pm2 save`
 
 Your server should now be set to run on startup and every time you reboot your Pi. You may want to test it to make sure it works everytime. For more information visit the [pm2 docs](https://pm2.io/doc/en/runtime/overview/ "https://pm2.io/doc/en/runtime/overview/").
-
-### Connect
-If you everything is in place and your server is running properly, you can now connect to the client interface via the browser of any other device that exists on the same local network that your Raspberry Pi is connected to. To do this, type in the local IPv4 address of your Pi followed by the port number (3000).
-
-For example, in the url bar of your browser type in: `192.168.1.128:3000`
-
-Your Pi terminal should have outputted the local IPv4 address your server can be reached. But again, if it doesn't or the server crashes, check line 48 in [server.js](https://github.com/bvillagran/pinary-lights/blob/master/server.js) and make adjustments as needed.
-
 
 # Background Information
 
